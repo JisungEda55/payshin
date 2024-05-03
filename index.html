@@ -3,35 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>기기 확인</title>
+<title>3rd_Pay</title>
 <style>
+/* CSS 스타일링 */
 body {
     font-family: Arial, sans-serif;
+    text-align: center;
 }
 
-#message {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    font-size: 20px;
+.container {
+    margin-top: 50px;
+}
+
+#image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
 }
 </style>
 </head>
 <body>
-<div id="message"></div>
-<script>
-window.onload = function() {
-    var userAgent = navigator.userAgent.toLowerCase();
-    var messageElement = document.getElementById('message');
+<div class="container">
+    <!-- 버튼들과 이미지를 감싸는 div -->
+    <button onclick="changeImage('image1')">네이버페이</button>
+    <button onclick="changeImage('image2')">토스페이</button>
+    <button onclick="changeImage('image3')">카카오페이</button>
+    <div>
+        <img id="image" src="" alt="이미지">
+    </div>
+</div>
 
-    if (userAgent.includes('mobile') || userAgent.includes('android')) {
-        messageElement.innerText = '감사합니다.';
-    } else {
-        messageElement.innerText = '앗! 보안을 위해 모바일로 접속해주세요.';
+<script>
+// JavaScript로 이미지 변경 함수 정의
+function changeImage(imageName) {
+    var imageElement = document.getElementById('image');
+    switch(imageName) {
+        case 'image1':
+            imageElement.src = "https://private-user-images.githubusercontent.com/157635626/327730635-bf970d11-3a15-48ad-a002-1b05a721b013.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTQ3MzMzMjEsIm5iZiI6MTcxNDczMzAyMSwicGF0aCI6Ii8xNTc2MzU2MjYvMzI3NzMwNjM1LWJmOTcwZDExLTNhMTUtNDhhZC1hMDAyLTFiMDVhNzIxYjAxMy5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQwNTAzJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MDUwM1QxMDQzNDFaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT04NTIyOGYxZjcwMjlkNjA2OTZmODMzMDEwZmViYmY3YzQ0NmIxYmFhOWEwMTg5MzliYjkxZGUwZjI5YWRkMGUzJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.lLu680xkMKlr2Q4Kgt1sDwB_Olr3ziZ1dMD-h6h8vEI"; // 첫 번째 이미지 URL로 변경
+            break;
+        case 'image2':
+            imageElement.src = "https://private-user-images.githubusercontent.com/157635626/327730642-a3e36d5e-555f-4c28-baae-c406019cb4a3.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTQ3MzMzMjEsIm5iZiI6MTcxNDczMzAyMSwicGF0aCI6Ii8xNTc2MzU2MjYvMzI3NzMwNjQyLWEzZTM2ZDVlLTU1NWYtNGMyOC1iYWFlLWM0MDYwMTljYjRhMy5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQwNTAzJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MDUwM1QxMDQzNDFaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT04MDE3ZDAwOTQ5M2ZhZDJiM2QwMGNmNDRiN2FhOGMwYTk3M2I5OWQzNDEzNTU4ZGY1OWExMTIzNzY4ODFkMmFjJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.trTbISzYVBuhJCZhSQw9YTGzjhZ9dtpNHVriCw1S-BA"; // 두 번째 이미지 URL로 변경
+            break;
+        case 'image3':
+            imageElement.src = "https://private-user-images.githubusercontent.com/157635626/327730648-bf698ca1-61e6-4504-b51f-bc71dacb497e.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTQ3MzMzMjEsIm5iZiI6MTcxNDczMzAyMSwicGF0aCI6Ii8xNTc2MzU2MjYvMzI3NzMwNjQ4LWJmNjk4Y2ExLTYxZTYtNDUwNC1iNTFmLWJjNzFkYWNiNDk3ZS5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQwNTAzJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MDUwM1QxMDQzNDFaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT03YWI0YTg1ZDdiNmFhN2JlYzdiNTZhNGMyNjVhYzQ2M2IzNjY0YjdkYmI5ZDFkY2QyYjNmMjQ3ZjJmNWY0YzRlJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.BQTRLGtqhXQcOOYWOEx9mUloH7Oj7kZLeTaWBihL44s"; // 세 번째 이미지 URL로 변경
+            break;
+        default:
+            break;
     }
-};
+}
 </script>
 </body>
 </html>
