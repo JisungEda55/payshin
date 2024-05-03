@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>기기 확인</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+}
+
+#message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 20px;
+}
+</style>
+</head>
+<body>
+<div id="message"></div>
+<script>
+window.onload = function() {
+    var userAgent = navigator.userAgent.toLowerCase();
+    var messageElement = document.getElementById('message');
+
+    if (userAgent.includes('mobile') || userAgent.includes('android')) {
+        messageElement.innerText = '감사합니다.';
+    } else {
+        messageElement.innerText = '앗! 보안을 위해 모바일로 접속해주세요.';
+    }
+};
+</script>
+</body>
+</html>
