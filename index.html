@@ -1,57 +1,77 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shin's Kiosk</title>
+<title>Shin Pay</title>
 <style>
-/* CSS 스타일링 */
+/* 이미지 전환을 위한 애니메이션 효과 */
+@keyframes slide {
+  0% { opacity: 0; transform: translate(-50%, -50%); }
+  100% { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+/* 이미지 스타일 */
+img {
+  position: fixed; /* 이미지를 화면 정중앙에 고정시킵니다 */
+  top: 50%; /* 화면 상단에서 절반만큼 내려옵니다 */
+  left: 50%; /* 화면 왼쪽에서 절반만큼 이동합니다 */
+  transform: translate(-50%, -50%); /* 이미지를 정중앙으로 이동시킵니다 */
+  max-width: 85vw; /* 디스플레이 폭의 85%로 설정하여 정사각형이 되도록 합니다 */
+  max-height: 85vw; /* 디스플레이 폭의 85%로 설정하여 정사각형이 되도록 합니다 */
+  border-radius: 50px; /* 둥근 사각형을 만듭니다 */
+  overflow: hidden; /* 이미지가 사각형을 벗어나지 않도록 설정합니다 */
+  display: none; /* 초기에는 이미지를 숨깁니다 */
+  animation: slide 0.5s ease-in-out; /* 애니메이션 효과 적용 */
+}
+
+/* 첫 번째 이미지는 보여줍니다 */
+img:first-child {
+  display: block;
+}
+
+/* 전체 페이지 배경 색상 제거 */
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-}
-
-.container {
-    margin-top: 50px;
-}
-
-#image {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-    margin-bottom: 20px;
+  background-color: transparent;
 }
 </style>
 </head>
 <body>
-<div class="container">
-    <!-- 버튼들과 이미지를 감싸는 div -->
-    <button onclick="changeImage('image1')">네이버페이</button>
-    <button onclick="changeImage('image2')">토스페이</button>
-    <button onclick="changeImage('image3')">카카오페이</button>
-    <div>
-        <img id="image" src="" alt="이미지">
-    </div>
-</div>
+
+<div id="image-container"></div>
 
 <script>
-// JavaScript로 이미지 변경 함수 정의
-function changeImage(imageName) {
-    var imageElement = document.getElementById('image');
-    switch(imageName) {
-        case 'image1':
-            imageElement.src = "https://private-user-images.githubusercontent.com/157635626/327730635-bf970d11-3a15-48ad-a002-1b05a721b013.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTQ3MzczODksIm5iZiI6MTcxNDczNzA4OSwicGF0aCI6Ii8xNTc2MzU2MjYvMzI3NzMwNjM1LWJmOTcwZDExLTNhMTUtNDhhZC1hMDAyLTFiMDVhNzIxYjAxMy5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQwNTAzJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MDUwM1QxMTUxMjlaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1lZTRlNzA2MmNiMWZlZTNlZWZiNWI5NjYwNjJhYmZkYjNjZTllMjQxOGU0MzljYjBkODA2NmQ3NGQ5MmM3N2Q0JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.Bp_eVrfp5dNeDxXgPD0u6YLQUnahwrZWrauVCk5i1gs"; // 첫 번째 이미지 URL로 변경
-            break;
-        case 'image2':
-            imageElement.src = "https://private-user-images.githubusercontent.com/157635626/327730642-a3e36d5e-555f-4c28-baae-c406019cb4a3.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTQ3MzczODksIm5iZiI6MTcxNDczNzA4OSwicGF0aCI6Ii8xNTc2MzU2MjYvMzI3NzMwNjQyLWEzZTM2ZDVlLTU1NWYtNGMyOC1iYWFlLWM0MDYwMTljYjRhMy5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQwNTAzJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MDUwM1QxMTUxMjlaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT04ZmUxODRiMzRhNWExN2ExZDU2NTJmNmUwOGY3YWY4NDI0Y2QxNjI5YjQ2ZjAyZGUyYTU0ZTQyOWZhZTRiMmNmJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.RvPj60bUyYf_VqZH_lCoY35SgXLcfBSH2qhX0_ePQP8"; // 두 번째 이미지 URL로 변경
-            break;
-        case 'image3':
-            imageElement.src = "https://private-user-images.githubusercontent.com/157635626/327730648-bf698ca1-61e6-4504-b51f-bc71dacb497e.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTQ3MzczODksIm5iZiI6MTcxNDczNzA4OSwicGF0aCI6Ii8xNTc2MzU2MjYvMzI3NzMwNjQ4LWJmNjk4Y2ExLTYxZTYtNDUwNC1iNTFmLWJjNzFkYWNiNDk3ZS5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQwNTAzJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MDUwM1QxMTUxMjlaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1iYjUzYmQ2YTc4ZjQ5MGEyZWRjZmEwYzYxYzcxYjQxYmY5NDBkYTgwMzA2OWIxYmI4Y2JjMGRhMjBkYjJiMDAwJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.0NtZnfqrAJa8KBnzRIVns7SATo9UUFMOB519m_7Y1sA"; // 세 번째 이미지 URL로 변경
-            break;
-        default:
-            break;
-    }
+// 이미지 URL들을 담은 배열
+const imageUrls = [
+  "https://private-user-images.githubusercontent.com/157635626/327730635-bf970d11-3a15-48ad-a002-1b05a721b013.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTQ3ODIyODUsIm5iZiI6MTcxNDc4MTk4NSwicGF0aCI6Ii8xNTc2MzU2MjYvMzI3NzMwNjM1LWJmOTcwZDExLTNhMTUtNDhhZC1hMDAyLTFiMDVhNzIxYjAxMy5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQwNTA0JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MDUwNFQwMDE5NDVaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT05ZTAzZDM0ZmU0YjRiMmUxMjkyMTUwZDcyODFhYTM0YWM3YWJiOTliOWNjYjhkYmViNWExMWJiMDczMTVkYTNkJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9._zvk0VtIfiXGVKdXdbGC9HL5JdbZ8HaE7CI6nmkwSFs",
+  "https://private-user-images.githubusercontent.com/157635626/327730642-a3e36d5e-555f-4c28-baae-c406019cb4a3.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTQ3ODIyODUsIm5iZiI6MTcxNDc4MTk4NSwicGF0aCI6Ii8xNTc2MzU2MjYvMzI3NzMwNjQyLWEzZTM2ZDVlLTU1NWYtNGMyOC1iYWFlLWM0MDYwMTljYjRhMy5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQwNTA0JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MDUwNFQwMDE5NDVaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT0zN2Q1N2NkMzVhZWY1NThiNzZjZjQwNjI2OTVkOWY3MGVmYjZiYTcxMDliNWMyZGFmMWMyMjI5OGU3OGY5NWY2JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.RleWq2U-MjJJ9yI3oG5H33AdM-mckGWN0Bhmx2zypoc",
+  "https://private-user-images.githubusercontent.com/157635626/327730648-bf698ca1-61e6-4504-b51f-bc71dacb497e.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTQ3ODIyODUsIm5iZiI6MTcxNDc4MTk4NSwicGF0aCI6Ii8xNTc2MzU2MjYvMzI3NzMwNjQ4LWJmNjk4Y2ExLTYxZTYtNDUwNC1iNTFmLWJjNzFkYWNiNDk3ZS5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQwNTA0JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MDUwNFQwMDE5NDVaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT03NTJkNDU3YjJjOWI4ODQ0MjIxMzc4MjBjNWY2Y2VhZWJlYmRiMWMzMjA3YjJjOGRhN2IyZGVjY2IyMTdlYTNlJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.CPRY3sECaNLChihK3vYuHO8ZL7v4QvD0FyIyk2-vVK0",
+  "https://private-user-images.githubusercontent.com/157635626/327904315-9a75e05f-6711-40e5-8075-02afdab94891.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTQ3ODIzNTYsIm5iZiI6MTcxNDc4MjA1NiwicGF0aCI6Ii8xNTc2MzU2MjYvMzI3OTA0MzE1LTlhNzVlMDVmLTY3MTEtNDBlNS04MDc1LTAyYWZkYWI5NDg5MS5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQwNTA0JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MDUwNFQwMDIwNTZaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT0zNTJjMzFkMGVkNjM5MjQ1ZjQ0MWEwZGQ3ZmJlYjEyODVlY2NiYTU0YjkyZDc5YWMyZGNkYWU1OTgzYzU5ZmY3JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.DLPD7TT4Gjyx7YG41TctC9owCT6j89dXo7ag0ybl_sM"
+];
+
+let currentIndex = 0; // 현재 이미지의 인덱스
+
+// 이미지를 보여주는 함수
+function showImages() {
+  const container = document.getElementById("image-container");
+  container.innerHTML = ""; // 기존 이미지를 모두 제거
+
+  // 현재 인덱스의 이미지를 표시하고 다음 인덱스로 이동
+  const img = document.createElement("img");
+  img.src = imageUrls[currentIndex];
+  img.alt = "Image";
+  container.appendChild(img); // 컨테이너에 이미지 추가
+
+  // 다음 이미지의 인덱스 계산
+  currentIndex = (currentIndex + 1) % imageUrls.length;
+
+  // 6초마다 showImages 함수 호출하여 다음 이미지 표시
+  setTimeout(showImages, 6000);
 }
+
+// 페이지가 로드될 때 이미지 보여주기 시작
+window.onload = showImages;
 </script>
+
 </body>
 </html>
