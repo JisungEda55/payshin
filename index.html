@@ -17,12 +17,12 @@ img {
   top: 50%; /* 화면 상단에서 절반만큼 내려옵니다 */
   left: 50%; /* 화면 왼쪽에서 절반만큼 이동합니다 */
   transform: translate(-50%, -50%); /* 이미지를 정중앙으로 이동시킵니다 */
-  max-width: 87vh; /* 디스플레이 폭의 85%로 설정하여 정사각형이 되도록 합니다 */
-  max-height: 87vh; /* 디스플레이 폭의 85%로 설정하여 정사각형이 되도록 합니다 */
+  max-width: 87vw; /* 기본적으로 디스플레이 너비의 87%로 설정합니다 */
+  max-height: 87vh; /* 기본적으로 디스플레이 높이의 87%로 설정합니다 */
   border-radius: 50px; /* 둥근 사각형을 만듭니다 */
   overflow: hidden; /* 이미지가 사각형을 벗어나지 않도록 설정합니다 */
   display: none; /* 초기에는 이미지를 숨깁니다 */
-  animation: slide 1.2s ease-in-out; /* 애니메이션 효과 적용 */
+  animation: slide 0.5s ease-in-out; /* 애니메이션 효과 적용 */
 }
 
 /* 첫 번째 이미지는 보여줍니다 */
@@ -72,7 +72,24 @@ function showImages() {
 }
 
 // 페이지가 로드될 때 이미지 보여주기 시작
-window.onload = showImages;
+window.onload = function() {
+  showImages();
+
+  // 디스플레이의 가로와 세로 길이 비교하여 이미지 크기 조정
+  const img = document.querySelector("img");
+  const displayWidth = window.innerWidth;
+  const displayHeight = window.innerHeight;
+
+  if (displayWidth > displayHeight) {
+    // 디스플레이 가로가 세로보다 클 때는 세로를 기준으로 87% 크기로 설정
+    img.style.maxHeight = "87vh";
+    img.style.maxWidth = "auto";
+  } else {
+    // 디스플레이 세로가 가로보다 클 때는 가로를 기준으로 85% 크기로 설정
+    img.style.maxWidth = "85vw";
+    img.style.maxHeight = "auto";
+  }
+};
 </script>
 
 </body>
